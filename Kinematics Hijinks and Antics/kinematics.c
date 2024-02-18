@@ -62,7 +62,29 @@ double FinalPosition(OneDVariables variables)
 }
 
 
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////Final Velocity///////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -154,7 +176,23 @@ double findingVelocity(OneDVariables variables)
 	return velocity;
 }
 
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////inital velocity//////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 
 
@@ -241,7 +279,22 @@ double findingInitialVelocity(OneDVariables variables)
 	return initialVelocity;
 }
 
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////acceleration////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 
 /***********************the first method to calculate acceleration*************************/
@@ -331,7 +384,23 @@ double findingAcceleration(OneDVariables variables)
 	return initialVelocity;
 }
 
+
+
+
+
+
+
+
 //////////////////////////////////////////////////time/////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
 
 
 /***********************the first method to calculate time*************************/
@@ -488,13 +557,23 @@ double findingTime(OneDVariables variables)
 
 
 
-//final position
+//////////////////////////////////////////////////final position/////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+
+/***********************the first method to calculate final position*************************/
 double findFinalPositionMethod1(OneDVariables variables)
 {
 	double finalPosition = (InitialPosition(variables) + InitialVelocity(variables) * Time(variables) + 1.0 / 2.0 * Acceleration(variables) * Time(variables) * Time(variables));
 	return finalPosition;
 }
+/***********************the first method check to calculate final position*************************/
 int canUsefindFinalPositionMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -505,11 +584,13 @@ int canUsefindFinalPositionMethod1(OneDVariables variables)//check if we have th
 	return canIUseIt;
 }
 
+/***********************the second method to calculate final position*************************/
 double findFinalPositionMethod2(OneDVariables variables)
 {
 	double finalPosition = (FinalVelocity(variables) * FinalVelocity(variables) - InitialVelocity(variables) * InitialVelocity(variables)) / (2 * Acceleration(variables)) + InitialPosition(variables);
 	return finalPosition;
 }
+/***********************the second method check to calculate final position*************************/
 int canUsefindFinalPositionMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -520,11 +601,13 @@ int canUsefindFinalPositionMethod2(OneDVariables variables)//check if we have th
 	return canIUseIt;
 }
 
+/***********************the third method to calculate final position*************************/
 double findFinalPositionMethod3(OneDVariables variables)
 {
 	double finalPosition = ((FinalVelocity(variables) + InitialVelocity(variables)) / 2.0) * Time(variables) + InitialPosition(variables);
 	return finalPosition;
 }
+/***********************the third method check to calculate final position*************************/
 int canUsefindFinalPositionMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -535,6 +618,7 @@ int canUsefindFinalPositionMethod3(OneDVariables variables)//check if we have th
 	return canIUseIt;
 }
 
+/***********************function to call all of the checking function to see if there is any possible way to calculate final position*************************/
 int canFindFinalPosition(OneDVariables variables)
 {
 	int canIFindIt = cannot;
@@ -545,6 +629,7 @@ int canFindFinalPosition(OneDVariables variables)
 	return canIFindIt;
 }
 
+/***********************Function to find the final position method that works and call it for calculation*************************/
 double findingFinalPosition(OneDVariables variables)
 {
 	double finalPosition = 0;
@@ -567,19 +652,25 @@ double findingFinalPosition(OneDVariables variables)
 	return finalPosition;
 }
 
-//Position
+
+
+
+
+
+//////////////////////////////////////initial position////////////////////////////////////////////////
 
 
 
 
 
 
-
+/***********************the first method to calculate initial position*************************/
 double findInitialPositionMethod1(OneDVariables variables)
 {
 	double initialPosition = (FinalPosition(variables) - InitialVelocity(variables) * Time(variables) - 1.0 / 2.0 * Acceleration(variables) * Time(variables) * Time(variables));
 	return initialPosition;
 }
+/***********************the first method check to calculate initial position*************************/
 int canUsefindInitialPositionMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -590,11 +681,13 @@ int canUsefindInitialPositionMethod1(OneDVariables variables)//check if we have 
 	return canIUseIt;
 }
 
+/***********************the second method to calculate initial position*************************/
 double findInitialPositionMethod2(OneDVariables variables)
 {
 	double initialPosition = FinalPosition(variables) - (FinalVelocity(variables) * FinalVelocity(variables) - InitialVelocity(variables) * InitialVelocity(variables)) / (2 * Acceleration(variables));
 	return initialPosition;
 }
+/***********************the second method check to calculate initial position*************************/
 int canUsefindInitialPositionMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -605,11 +698,13 @@ int canUsefindInitialPositionMethod2(OneDVariables variables)//check if we have 
 	return canIUseIt;
 }
 
+/***********************the third method to calculate initial position*************************/
 double findInitialPositionMethod3(OneDVariables variables)
 {
 	double initialPosition = FinalPosition(variables) - (FinalVelocity(variables) + InitialVelocity(variables)) / 2;
 	return initialPosition;
 }
+/***********************the third method check to calculate initial position*************************/
 int canUsefindInitialPositionMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -620,6 +715,8 @@ int canUsefindInitialPositionMethod3(OneDVariables variables)//check if we have 
 	return canIUseIt;
 }
 
+
+/***********************function to call all of the checking function to see if there is any possible way to calculate inital position*************************/
 int canFindInitialPosition(OneDVariables variables)
 {
 	int canIFindIt = cannot;
@@ -630,6 +727,7 @@ int canFindInitialPosition(OneDVariables variables)
 	return canIFindIt;
 }
 
+/***********************Function to find the initial position method that works and call it for calculation*************************/
 double findingInitialPosition(OneDVariables variables)
 {
 	double finalPosition = 0;
