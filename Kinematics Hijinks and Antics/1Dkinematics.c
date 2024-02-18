@@ -510,13 +510,13 @@ double findingTime(OneDVariables variables)
 
 double findInitialPositionMethod1(OneDVariables variables)
 {
-	double initialPosition = (InitialPosition(variables) + InitialVelocity(variables) * Time(variables) + 1 / 2 * Acceleration(variables) * Time(variables) * Time(variables));
+	double initialPosition = (FinalPosition(variables) - InitialVelocity(variables) * Time(variables) - 1 / 2 * Acceleration(variables) * Time(variables) * Time(variables));
 	return initialPosition;
 }
 int canUsefindFinalDistanceMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
-	if (hasVariable(variables, initialPosition) && hasVariable(variables, veloctiy) && hasVariable(variables, time) && hasVariable(variables, acceleration))
+	if (hasVariable(variables, finalPosition) && hasVariable(variables, veloctiy) && hasVariable(variables, time) && hasVariable(variables, acceleration))
 	{// all these variables are needed for finding initial velocity via our first equation(method 1)
 		canIUseIt = can;
 	}
@@ -525,13 +525,13 @@ int canUsefindFinalDistanceMethod1(OneDVariables variables)//check if we have th
 
 double findFinalPositionMethod2(OneDVariables variables)
 {
-	double initialPosition = (FinalVelocity(variables) * FinalVelocity(variables) - InitialVelocity(variables) * InitialVelocity(variables)) / (2 * Acceleration(variables)) + InitialPosition(variables);
+	double initialPosition = FinalPosition(variables) - (FinalVelocity(variables) * FinalVelocity(variables) - InitialVelocity(variables) * InitialVelocity(variables)) / (2 * Acceleration(variables));
 	return initialPosition;
 }
 int canUsefindFinalDistanceMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
-	if (hasVariable(variables, veloctiy) && hasVariable(variables, initalVelocity) && hasVariable(variables, acceleration) && hasVariable(variables, initialPosition))
+	if (hasVariable(variables, finalPosition) && hasVariable(variables, veloctiy) && hasVariable(variables, initalVelocity) && hasVariable(variables, acceleration))
 	{// all these variables are needed for finding initial velocity via our first equation(method 1)
 		canIUseIt = can;
 	}
@@ -540,13 +540,13 @@ int canUsefindFinalDistanceMethod2(OneDVariables variables)//check if we have th
 
 double findFinalPositionMethod3(OneDVariables variables)
 {
-	double initialPosition = (FinalVelocity(variables) + InitialVelocity(variables)) / 2 + InitialPosition(variables);
+	double initialPosition = FinalPosition(variables)-(FinalVelocity(variables) + InitialVelocity(variables)) / 2;
 	return initialPosition;
 }
 int canUsefindFinalDistanceMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
-	if (hasVariable(variables, veloctiy) && hasVariable(variables, initalVelocity) && hasVariable(variables, initialPosition))
+	if (hasVariable(variables, finalPosition) && hasVariable(variables, veloctiy) && hasVariable(variables, initalVelocity))
 	{// all these variables are needed for finding initial velocity via our first equation(method 1)
 		canIUseIt = can;
 	}
@@ -556,7 +556,7 @@ int canUsefindFinalDistanceMethod3(OneDVariables variables)//check if we have th
 int canFindTime(OneDVariables variables)
 {
 	int canIFindIt = cannot;
-	if (canUsefindFinalDistanceMethod1(variables) || canUsefindTimeMethod2(variables) || canUsefindTimeMethod3(variables))
+	if (canUsefindFinalDistanceMethod1(variables) || canUsefindFinalDistanceMethod2(variables) || canUsefindFinalDistanceMethod3(variables))
 	{// all these variables are needed for fiding velocity with our second equation
 		canIFindIt = can;
 	}
@@ -584,6 +584,21 @@ double findingTime(OneDVariables variables)
 	}
 	return finalPosition;
 }
+
+
+
+typedef enum canOrNo
+{
+	//has =0, doesNotHave =1
+	cannot, can
+}hasOrNo;
+
+int hasVariable(OneDVariables variables, int variableIndex);
+double findingVelocity(OneDVariables variables);
+
+
+
+
 /*
 double findVelocityMethod1(OneDVariables variables)
 {
