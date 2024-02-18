@@ -515,7 +515,7 @@ double findTimeMethod4Temp(OneDVariables variables)
 		}
 		else
 		{
-			time = -1;//FIX ME DADDY
+			time = -1;//Should IN THEORY never reach this point
 		}
 
 
