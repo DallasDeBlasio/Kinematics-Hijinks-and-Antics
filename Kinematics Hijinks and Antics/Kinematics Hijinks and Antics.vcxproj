@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.c" />
     <ClCompile Include="kinematics.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />

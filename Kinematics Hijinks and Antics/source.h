@@ -16,6 +16,8 @@ typedef struct oneDKinematicsVariables
 	// for these arrays index 0 is velocity, index 1 is initaly velocity, index 3 is acceleration, index 4 is time, index 5 is final position, index 6 is begining position
 	int hasVariable[6];//has a 1 if the variable is present, a 0 if it is not
 	double variableValue[6];
+	char distanceUnits[20];
+	char timeUnits[20];
 }OneDVariables;
 
 // read above struct
@@ -76,3 +78,5 @@ void clearScanf(void);
 void printSearchedNumber(OneDVariables variables, int index);
 int getBasicDesiredField1DKinematicsConstantAcceleration(void);
 void collectionForCalculation(OneDVariables *Variables);
+void getDistanceUnits(char unitsString[]);
+void getTimeUnits(char unitsString[]);

@@ -14,6 +14,9 @@ void clearScanf(void)
 /***********************Funciton to be able to get all of the user inputs*************************/
 void fetchMeTheirSouls(OneDVariables* variables)
 {
+	getDistanceUnits((*variables).distanceUnits);
+	getTimeUnits((*variables).timeUnits);
+	
 	getVariableForStruct(&((*variables).hasVariable[veloctiy]), &((*variables).variableValue[veloctiy]), "Final Veloctiy");
 	getVariableForStruct(&((*variables).hasVariable[initalVelocity]), &((*variables).variableValue[initalVelocity]), "Initial Velocity");
 	getVariableForStruct(&((*variables).hasVariable[acceleration]), &((*variables).variableValue[acceleration]), "Acceleration");
@@ -25,6 +28,10 @@ void fetchMeTheirSouls(OneDVariables* variables)
 /***********************Function to print everything in the struct, often used to just check our code*************************/
 void printStructInfo(OneDVariables variables)
 {
+	//char DistanceUnitString[20];
+	//char UnitString[20];
+
+	
 	printf("Does it have a variable: %d,    Variable number: %f\n", variables.hasVariable[veloctiy], variables.variableValue[veloctiy]);
 	printf("Does it have a variable: %d,    Variable number: %f\n", variables.hasVariable[initalVelocity], variables.variableValue[initalVelocity]);
 	printf("Does it have a variable: %d,    Variable number: %f\n", variables.hasVariable[acceleration], variables.variableValue[acceleration]);
@@ -57,6 +64,104 @@ void getVariableForStruct(int* variableIsHad, double* variableValue, char* field
 		printf("please enter a valid input, you will be taken back to enter a new number\n");
 		system("pause");
 		getVariableForStruct(variableIsHad, variableValue, field);
+	}
+}
+
+/***********************Function to find the units for distace*************************/
+void getDistanceUnits(char unitsString[])
+{
+	system("cls");
+	char units[32] = { '0' };
+	int selection = 0;
+	do {
+		printf("Please enter in the number for units you would like to use for distance\n");
+		printf("If the units you would like to are not on the list please select self input\n");
+		printf("to navigate this menu, please select the number next to each of the prompts\n");
+		printf("1) meters(m)\n");
+		printf("2) feet (ft)\n");
+		printf("3) cenimeter(cm)\n");
+		printf("4) inches(in)\n");
+		printf("5) miles(mi)\n");
+		printf("6) self input\n");
+
+		scanf("%d", &selection);
+		clearScanf();
+
+	} while (selection < 1 || selection>7);
+
+	switch (selection)
+	{
+	case 1:
+		strcpy(unitsString, "m");
+		break;
+	case 2:
+		strcpy(unitsString, "ft");
+		break;
+
+	case 3:
+		strcpy(unitsString, "cm");
+
+		break;
+
+	case 4:
+		strcpy(unitsString, "in");
+
+		break;
+
+	case 5:
+		strcpy(unitsString, "mi");
+
+		break;
+	case 6:
+		printf("Please enter custom the units you would like to use\n");
+		gets_s(units, sizeof(units));
+		strcpy(unitsString, units);
+		break;
+
+
+	}
+}
+
+/**********************Function to get the units for time************************/
+void getTimeUnits(char unitsString[])
+{
+	system("cls");
+	char units[32] = { '0' };
+	int selection = 0;
+	do {
+		printf("Please enter in the number for units you would like to use for time\n");
+		printf("If the units you would like to are not on the list please select self input\n");
+		printf("to navigate this menu, please select the number next to each of the prompts\n");
+		printf("1) seconds(s)\n");
+		printf("2) hours(h)\n");
+		printf("3) miliseconds (ms)\n");
+		printf("4) self input\n");
+
+		scanf("%d", &selection);
+		clearScanf();
+	} while (selection < 1 || selection>7);
+
+	switch (selection)
+	{
+	case 1:
+		strcpy(unitsString, "s");
+		break;
+	case 2:
+		strcpy(unitsString, "h");
+		break;
+
+	case 3:
+		strcpy(unitsString, "ms");
+
+		break;
+
+	case 4:
+		printf("Please enter custom the units you would like to use\n");
+		gets_s(units, sizeof(units));
+		strcpy(unitsString, units);
+		break;
+
+
 	}
 }
 
@@ -94,7 +199,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The final velocity is: %f\n", variables.variableValue[index]);
+			printf("The final velocity is: %f %s/%s\n", variables.variableValue[index], variables.distanceUnits,variables.timeUnits);
 		}
 	}
 
@@ -106,7 +211,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The initial velocity is: %f\n", variables.variableValue[index]);
+			printf("The initial velocity is: %f %s/%s\n", variables.variableValue[index], variables.distanceUnits, variables.timeUnits);
 		}
 	}
 	if (index == 2)
@@ -117,7 +222,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The acceleration is: %f\n", variables.variableValue[index]);
+			printf("The acceleration is: %f %s/%s^2\n", variables.variableValue[index], variables.distanceUnits, variables.timeUnits);
 		}
 	}
 	if (index == 3)
@@ -128,7 +233,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The time is: %f\n", variables.variableValue[index]);
+			printf("The time is: %f %s\n", variables.variableValue[index], variables.timeUnits);
 		}
 	}
 	if (index == 4)
@@ -139,7 +244,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The final position is: %f\n", variables.variableValue[index]);
+			printf("The final position is: %f %s\n", variables.variableValue[index], variables.distanceUnits);
 		}
 	}
 	if (index == 5)
@@ -150,7 +255,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 		}
 		else
 		{
-			printf("The initial position is: %f\n", variables.variableValue[index]);
+			printf("The initial position is: %f %s\n", variables.variableValue[index], variables.distanceUnits);
 		}
 	}
 }
