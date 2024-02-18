@@ -1,6 +1,6 @@
 #include "menu.h"
 
-
+/***********************The main menu function that lets the user navigate our program*************************/
 void MainMenu()
 {
 	OneDVariables testVariables;
@@ -12,6 +12,7 @@ void MainMenu()
 
 	int checkInputNumber = 0;
 	int mainMenuExitNumber = 0;
+	int miniMunuExitNumber = 0;
 
 	while (mainMenuExitNumber < 1)
 	{
@@ -20,26 +21,30 @@ void MainMenu()
 			printf("Welcome to the Physics Calculator\n");
 			printf("To navigate, please type the number next to the prompt\n");
 			printf("1) 1D kinimatics calculator\n");
-			printf("2) Fluids calculator\n");
-			printf("3) Exit the program\n");
+			printf("2) Exit the program\n");
 			scanf("%d", &checkInputNumber);
 			clearScanf();
-		} while (checkInputNumber < 0 || checkInputNumber > 3);
+		} while (checkInputNumber < 0 || checkInputNumber > 2);
 
 		if (checkInputNumber == 1)
 		{
 			fetchMeTheirSouls(&testVariables);
-			//printStructInfo(testVariables);
-			int index = getBasicDesiredField1DKinematicsConstantAcceleration();
-			system("cls");
-			printSearchedNumber(testVariables, index);
+			while(miniMunuExitNumber<2)
+			{
+				int index = getBasicDesiredField1DKinematicsConstantAcceleration();
+				if (index == 6)
+				{
+					break;
+				}
+				collectionForCalculation(&testVariables);
+				printSearchedNumber(testVariables, index);
+				system("pause");
+				system("cls");
+			}
 			system("\npause\n");
+			
 		}
 		else if (checkInputNumber == 2)
-		{
-			printf("coming soon");
-		}
-		else if (checkInputNumber == 3)
 		{
 			system("cls");
 			printf("Hope to see you again! :)");
