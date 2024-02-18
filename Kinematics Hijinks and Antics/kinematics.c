@@ -369,9 +369,25 @@ int canUsefindTimeMethod2(OneDVariables variables)//check if we have the proper 
 }
 
 
+
+double findTimeMethod3(OneDVariables variables)//if quadratic has b of 0
+{
+
+	double time = sqrt(2 * (FinalPosition(variables) - InitialPosition(variables)) / Acceleration(variables));
+	return time;
+}
+int canUsefindTimeMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
+{
+	int canIUseIt = cannot;
+	if (hasVariable(variables, finalPosition) && hasVariable(variables, initialPosition) && hasVariable(variables, initalVelocity) && hasVariable(variables, acceleration) && InitialVelocity(variables) == 0)
+	{// all these variables are needed for finding initial velocity via our first equation(method 1)
+		canIUseIt = can;
+	}
+	return canIUseIt;
+}
+
+
 //check the preconditions for the quadratic formula (a cannot be 0 (divide by 0) and b^2 - 4ac >= 0 (negative square root))
-/***********************the third method to calculate time, this is different because it will be a quadratic*************************/
-//used variable names a, b, and c because thats how it is in the equation
 int canUseQuadraticFormula(double a, double b, double c)
 {
 	int canIUseIt = can;
@@ -400,7 +416,7 @@ double quadraticFormulaMinus(double a, double b, double c)
 
 
 //returns a negative if there are issue
-double findTimeMethod3Temp(OneDVariables variables)
+double findTimeMethod4Temp(OneDVariables variables)
 {
 	double a = 1.0 / 2.0 * Acceleration(variables);
 	double b = InitialVelocity(variables);
@@ -409,6 +425,8 @@ double findTimeMethod3Temp(OneDVariables variables)
 	//double time = 2 * (FinalPosition(variables) - InitialPosition(variables)) / (InitialVelocity(variables) + FinalVelocity(variables));
 	if (canUseQuadraticFormula(a, b, c))
 	{
+		//printf("ass");
+
 		//q=quadratic
 		double qMinus = quadraticFormulaMinus(a, b, c);
 		double qPlus = quadraticFormulaMinus(a, b, c);
@@ -416,6 +434,7 @@ double findTimeMethod3Temp(OneDVariables variables)
 		if (qMinus == qPlus)//if theres only one point
 		{
 			time = qMinus;
+
 		}
 		else if (qMinus < 0 && qPlus>0)//if there's qMinus is negative 
 		{
@@ -427,15 +446,14 @@ double findTimeMethod3Temp(OneDVariables variables)
 		}
 		else
 		{
-			return -1;//FIX ME DADDY
+			time = -1;//FIX ME DADDY
 		}
 
 
 	}
 	return time;
 }
-/***********************the third method check to calculate time*************************/
-int canUsefindTimeMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
+int canUsefindTimeMethod4(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
 	if (hasVariable(variables, acceleration) && hasVariable(variables, initalVelocity) && hasVariable(variables, initialPosition) && hasVariable(variables, finalPosition))
@@ -447,21 +465,20 @@ int canUsefindTimeMethod3(OneDVariables variables)//check if we have the proper 
 
 
 
-/***********************function to call all of the checking function to see if there is any possible way to calculate time*************************/
 int canFindTime(OneDVariables variables)
 {
 	int canIFindIt = cannot;
-	if (canUsefindTimeMethod1(variables) || canUsefindTimeMethod2(variables) || canUsefindTimeMethod3(variables))
+	if (canUsefindTimeMethod1(variables) || canUsefindTimeMethod2(variables) || canUsefindTimeMethod3(variables) || canUsefindTimeMethod4(variables))
 	{// all these variables are needed for fiding velocity with our second equation
 		canIFindIt = can;
 	}
 	return canIFindIt;
 }
 
-/***********************Function to find the time method that works and call it for calculation*************************/
 double findingTime(OneDVariables variables)
 {
 	double time = 0;
+
 	if (canUsefindTimeMethod1(variables))
 	{
 		time = findTimeMethod1(variables);
@@ -472,15 +489,18 @@ double findingTime(OneDVariables variables)
 	}
 	else if (canUsefindTimeMethod3(variables))
 	{
-		time = findTimeMethod3Temp(variables);
+		time = findTimeMethod3(variables);
+	}
+	else if (canUsefindTimeMethod4(variables))
+	{
+		time = findTimeMethod4Temp(variables);
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		time = -1.0001;
+		time = -141.141;
 	}
 	return time;
 }
-
 
 
 
@@ -522,7 +542,9 @@ int canUsefindFinalPositionMethod2(OneDVariables variables)//check if we have th
 
 double findFinalPositionMethod3(OneDVariables variables)
 {
-	double finalPosition = ((FinalVelocity(variables) + InitialVelocity(variables)) / 2.0) * Time(variables) + InitialPosition(variables);
+	//double finalPosition = ((FinalVelocity(variables) + InitialVelocity(variables)) / 2.0) * Time(variables) + InitialPosition(variables);
+	double finalPosition = (FinalVelocity(variables) + InitialVelocity(variables)) / 2.0 * Time(variables) + InitialPosition(variables);
+
 	return finalPosition;
 }
 int canUsefindFinalPositionMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
