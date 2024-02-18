@@ -157,13 +157,14 @@ double findingVelocity(OneDVariables variables)
 /////////////////////////////////////////////////inital velocity//////////////////////////////////////////////////////////////////////
 
 
-////////////////////////////////////////////////////////////////////methods to get the final
 
+/***********************the first method to calculate initial velocity*************************/
 double findInitialVelocityMethod1(OneDVariables variables)
 {
 	double initialVelocity = variables.variableValue[veloctiy] - variables.variableValue[acceleration] * (variables.variableValue[time]);
 	return initialVelocity;
 }
+/***********************the first method check to calculate initial velocity*************************/
 int canUsefindInitialVelocityMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -173,12 +174,13 @@ int canUsefindInitialVelocityMethod1(OneDVariables variables)//check if we have 
 	}
 	return canIUseIt;
 }
-
+/***********************the second method to calculate initial velocity*************************/
 double findInitialVelocityMethod2(OneDVariables variables)
 {
 	double initialVelocity = sqrt(variables.variableValue[veloctiy] * variables.variableValue[veloctiy] - 2 * variables.variableValue[acceleration] * (variables.variableValue[finalPosition] - variables.variableValue[initialPosition]));
 	return initialVelocity;
 }
+/***********************the second method check to calculate initial velocity*************************/
 int canUsefindInitialVelocityMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -188,12 +190,13 @@ int canUsefindInitialVelocityMethod2(OneDVariables variables)//check if we have 
 	}
 	return canIUseIt;
 }
-
+/***********************the third method to calculate initial velocity*************************/
 double findInitialVelocityMethod3(OneDVariables variables)
 {
 	double initialVelocity = 2 * ((variables.variableValue[finalPosition] - variables.variableValue[initialPosition]) / variables.variableValue[time]) - variables.variableValue[veloctiy];
 	return initialVelocity;
 }
+/***********************the third method check to calculate initial velocity*************************/
 int canUsefindInitialVelocityMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -204,6 +207,7 @@ int canUsefindInitialVelocityMethod3(OneDVariables variables)//check if we have 
 	return canIUseIt;
 }
 
+/***********************function to call all of the checking function to see if there is any possible way to calculate initial velocity*************************/
 int canFindInitialVelocity(OneDVariables variables)
 {
 	int canIFindIt = cannot;
@@ -214,6 +218,7 @@ int canFindInitialVelocity(OneDVariables variables)
 	return canIFindIt;
 }
 
+/***********************Function to find the velocity method that works and call it for calculation*************************/
 double findingInitialVelocity(OneDVariables variables)
 {
 	double initialVelocity = 0;
@@ -236,14 +241,16 @@ double findingInitialVelocity(OneDVariables variables)
 	return initialVelocity;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//acelearation
+///////////////////////////////////////////////////acceleration////////////////////////////////////////////////////////////////
 
+
+/***********************the first method to calculate acceleration*************************/
 double findAccelerationMethod1(OneDVariables variables)
 {
 	double acceleration = (variables.variableValue[veloctiy] - variables.variableValue[initalVelocity]) / (variables.variableValue[time]);
 	return acceleration;
 }
+/***********************the first method check to calculate acceleration*************************/
 int canUsefindAccelerationMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -254,11 +261,14 @@ int canUsefindAccelerationMethod1(OneDVariables variables)//check if we have the
 	return canIUseIt;
 }
 
+
+/***********************the second method to calculate acceleration*************************/
 double findAccelerationMethod2(OneDVariables variables)
 {
 	double acceleration = 2 * (variables.variableValue[finalPosition] - variables.variableValue[initialPosition] - variables.variableValue[initalVelocity] * variables.variableValue[time]) / (variables.variableValue[time] * variables.variableValue[time]);
 	return acceleration;
 }
+/***********************the second method check to calculate acceleration*************************/
 int canUsefindAccelerationMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -269,11 +279,14 @@ int canUsefindAccelerationMethod2(OneDVariables variables)//check if we have the
 	return canIUseIt;
 }
 
+
+/***********************the third method to calculate acceleration*************************/
 double findAccelerationMethod3(OneDVariables variables)
 {
 	double acceleration = (variables.variableValue[veloctiy] * variables.variableValue[veloctiy] - variables.variableValue[initalVelocity] * variables.variableValue[initalVelocity]) / ((variables.variableValue[finalPosition] - variables.variableValue[initialPosition]) * 2);
 	return acceleration;
 }
+/***********************the third method to calculate acceleration*************************/
 int canUsefindAccelerationMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -284,6 +297,7 @@ int canUsefindAccelerationMethod3(OneDVariables variables)//check if we have the
 	return canIUseIt;
 }
 
+/***********************function to call all of the checking function to see if there is any possible way to calculate acceleration*************************/
 int canFindAcceleration(OneDVariables variables)
 {
 	int canIFindIt = cannot;
@@ -294,6 +308,7 @@ int canFindAcceleration(OneDVariables variables)
 	return canIFindIt;
 }
 
+/***********************Function to find the acceleration method that works and call it for calculation*************************/
 double findingAcceleration(OneDVariables variables)
 {
 	double initialVelocity = 0;
@@ -316,14 +331,16 @@ double findingAcceleration(OneDVariables variables)
 	return initialVelocity;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//time
+//////////////////////////////////////////////////time/////////////////////////////////////////////////////////////////
 
+
+/***********************the first method to calculate time*************************/
 double findTimeMethod1(OneDVariables variables)
 {
 	double time = (variables.variableValue[veloctiy] - variables.variableValue[initalVelocity]) / (variables.variableValue[acceleration]);
 	return time;
 }
+/***********************the first method check to calculate time*************************/
 int canUsefindTimeMethod1(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -334,11 +351,13 @@ int canUsefindTimeMethod1(OneDVariables variables)//check if we have the proper 
 	return canIUseIt;
 }
 
+/***********************the second method to calculate time*************************/
 double findTimeMethod2(OneDVariables variables)
 {
 	double time = 2 * (FinalPosition(variables) - InitialPosition(variables)) / (InitialVelocity(variables) + FinalVelocity(variables));
 	return time;
 }
+/***********************the second method check to calculate time*************************/
 int canUsefindTimeMethod2(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -351,6 +370,8 @@ int canUsefindTimeMethod2(OneDVariables variables)//check if we have the proper 
 
 
 //check the preconditions for the quadratic formula (a cannot be 0 (divide by 0) and b^2 - 4ac >= 0 (negative square root))
+/***********************the third method to calculate time, this is different because it will be a quadratic*************************/
+//used variable names a, b, and c because thats how it is in the equation
 int canUseQuadraticFormula(double a, double b, double c)
 {
 	int canIUseIt = can;
@@ -413,6 +434,7 @@ double findTimeMethod3Temp(OneDVariables variables)
 	}
 	return time;
 }
+/***********************the third method check to calculate time*************************/
 int canUsefindTimeMethod3(OneDVariables variables)//check if we have the proper variables to use method 1 to find velocity
 {
 	int canIUseIt = cannot;
@@ -425,6 +447,7 @@ int canUsefindTimeMethod3(OneDVariables variables)//check if we have the proper 
 
 
 
+/***********************function to call all of the checking function to see if there is any possible way to calculate time*************************/
 int canFindTime(OneDVariables variables)
 {
 	int canIFindIt = cannot;
@@ -435,6 +458,7 @@ int canFindTime(OneDVariables variables)
 	return canIFindIt;
 }
 
+/***********************Function to find the time method that works and call it for calculation*************************/
 double findingTime(OneDVariables variables)
 {
 	double time = 0;
