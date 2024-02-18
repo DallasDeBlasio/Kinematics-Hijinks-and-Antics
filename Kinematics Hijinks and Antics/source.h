@@ -30,10 +30,36 @@ typedef enum hasOrNo
 	doesHave,doesNotHave
 }hasOrNo;
 
+typedef enum canOrNo
+{
+	//cannot =0, can =1
+	cannot, can
+}hasOrNo;
+
+
+
+/**************************Functions for kinematic calculations*********************************/
+
 int hasVariable(OneDVariables variables, int variableIndex);
+double FinalVelocity(OneDVariables variables);
+double InitialVelocity(OneDVariables variables);
+double Acceleration(OneDVariables variables);
+double Time(OneDVariables variables);
+double InitialPosition(OneDVariables variables);
+double FinalPosition(OneDVariables variables);
 
+int canFindVelocity(OneDVariables variables);
 double findingVelocity(OneDVariables variables);
-
+int canFindInitialVelocity(OneDVariables variables);
+double findingInitialVelocity(OneDVariables variables);
+int canFindAcceleration(OneDVariables variables);
+double findingAcceleration(OneDVariables variables);
+int canFindTime(OneDVariables variables);
+double findingTime(OneDVariables variables);
+int canFindFinalPosition(OneDVariables variables);
+double findingFinalPosition(OneDVariables variables);
+int canFindInitialPosition(OneDVariables variables);
+double findingInitialPosition(OneDVariables variables);
 
 
 /**************************Functions for Menu*********************************/
@@ -41,7 +67,7 @@ double findingVelocity(OneDVariables variables);
 void MainMenu();
 
 
-/**************************Functions for user input*********************************/
+/**************************Functions for kinimatic user input*********************************/
 
 void fetchMeTheirSouls(OneDVariables* variables);
 void getVariableForStruct(int* variableIsHad, double* variableValue, char* field);
@@ -49,3 +75,4 @@ void printStructInfo(OneDVariables variables);
 void clearScanf(void);
 void printSearchedNumber(OneDVariables variables, int index);
 int getBasicDesiredField1DKinematicsConstantAcceleration(void);
+void collectionForCalculation(OneDVariables *Variables);

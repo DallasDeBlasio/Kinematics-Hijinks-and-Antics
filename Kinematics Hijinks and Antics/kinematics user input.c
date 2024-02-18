@@ -11,17 +11,18 @@ void clearScanf(void)
 	}
 }
 
-/***********************Funciton to be able to get all of the *************************/
+/***********************Funciton to be able to get all of the user inputs*************************/
 void fetchMeTheirSouls(OneDVariables* variables)
 {
-	getVariableForStruct(&((*variables).hasVariable[veloctiy]), &((*variables).variableValue[veloctiy]), "Veloctiy");
+	getVariableForStruct(&((*variables).hasVariable[veloctiy]), &((*variables).variableValue[veloctiy]), "Final Veloctiy");
 	getVariableForStruct(&((*variables).hasVariable[initalVelocity]), &((*variables).variableValue[initalVelocity]), "Initial Velocity");
 	getVariableForStruct(&((*variables).hasVariable[acceleration]), &((*variables).variableValue[acceleration]), "Acceleration");
-	getVariableForStruct(&((*variables).hasVariable[time]), &((*variables).variableValue[time]), "time");
-	getVariableForStruct(&((*variables).hasVariable[finalPosition]), &((*variables).variableValue[finalPosition]), "final Position");
-	getVariableForStruct(&((*variables).hasVariable[initialPosition]), &((*variables).variableValue[initialPosition]), "initial Position");
+	getVariableForStruct(&((*variables).hasVariable[time]), &((*variables).variableValue[time]), "Time");
+	getVariableForStruct(&((*variables).hasVariable[finalPosition]), &((*variables).variableValue[finalPosition]), "Final Position");
+	getVariableForStruct(&((*variables).hasVariable[initialPosition]), &((*variables).variableValue[initialPosition]), "Initial Position");
 }
 
+/***********************Function to print everything in the struct, often used to just check our code*************************/
 void printStructInfo(OneDVariables variables)
 {
 	printf("Does it have a variable: %d,    Variable number: %f\n", variables.hasVariable[veloctiy], variables.variableValue[veloctiy]);
@@ -32,7 +33,7 @@ void printStructInfo(OneDVariables variables)
 	printf("Does it have a variable: %d,    Variable number: %f\n", variables.hasVariable[initialPosition], variables.variableValue[initialPosition]);
 }
 
-//getVariableForStruct(&variables.hasVariable[initalVelocity],variables.variableValue[initalVelocity],"Initial Velocity");
+/***********************gets information for the known and unknown values*************************/
 void getVariableForStruct(int* variableIsHad, double* variableValue, char* field)
 {
 	system("cls");
@@ -40,7 +41,7 @@ void getVariableForStruct(int* variableIsHad, double* variableValue, char* field
 	printf("if the value is unknown please enter in a \"?\"\n");
 	printf("Please enter the %s: ", field);
 	scanf("%s", initialVelocity);
-	if (isdigit(*initialVelocity))
+	if (isdigit(*initialVelocity) || *initialVelocity == '-')
 	{
 		double FinalVelocity = atof(initialVelocity);
 		*(variableIsHad) = 1;
@@ -59,6 +60,8 @@ void getVariableForStruct(int* variableIsHad, double* variableValue, char* field
 	}
 }
 
+
+/***********************gets what the unknown value*************************/
 int getBasicDesiredField1DKinematicsConstantAcceleration(void)
 {
 	int menuNav = 0;
@@ -76,18 +79,18 @@ int getBasicDesiredField1DKinematicsConstantAcceleration(void)
 		printf("Or enter 6 to exit\n");
 		scanf("%d", &menuNav);
 		clearScanf();
-	} while (menuNav<0||menuNav>5);
+	} while (menuNav < 0 || menuNav>6);
 	return menuNav;
 }
 
+/***********************this will print whatever number they enter in to search, this work because we do the calculations beforehand*************************/
 void printSearchedNumber(OneDVariables variables, int index)
 {
 	if (index == 0)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
@@ -99,8 +102,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
@@ -111,8 +113,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
@@ -123,8 +124,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
@@ -135,8 +135,7 @@ void printSearchedNumber(OneDVariables variables, int index)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
@@ -147,12 +146,47 @@ void printSearchedNumber(OneDVariables variables, int index)
 	{
 		if (variables.hasVariable[index] == 0)
 		{
-			//calculate function
-			printf("coming soon\n");
+			printf("Cannot find this value with the values given\n");
 		}
 		else
 		{
 			printf("The initial position is: %f\n", variables.variableValue[index]);
 		}
+	}
+}
+
+
+/***********************Function that calls other functions responsible for checking if each specific calculation can be done*************************/
+void collectionForCalculation(OneDVariables* Variables)
+{
+	if (canFindVelocity(*Variables) && (*Variables).hasVariable[veloctiy] == 0)
+	{
+		(*Variables).variableValue[0] = findingVelocity(*Variables);
+		(*Variables).hasVariable[veloctiy] = 1;
+	}
+	if (canFindInitialVelocity(*Variables) && (*Variables).hasVariable[initalVelocity] == 0)
+	{
+		(*Variables).variableValue[1]=findingInitialVelocity(*Variables);
+		(*Variables).hasVariable[initalVelocity] = 1;
+	}
+	if (canFindAcceleration(*Variables) && (*Variables).hasVariable[acceleration] == 0)
+	{
+		(*Variables).variableValue[2]=findingAcceleration(*Variables);
+		(*Variables).hasVariable[acceleration] = 1;
+	}
+	if (canFindTime(*Variables) && (*Variables).hasVariable[time] == 0)
+	{
+		(*Variables).variableValue[3]=findingTime(*Variables);
+		(*Variables).hasVariable[time] = 1;
+	}
+	if (canFindFinalPosition(*Variables) && (*Variables).hasVariable[finalPosition] == 0)
+	{
+		(*Variables).variableValue[4]=findingFinalPosition(*Variables);
+		(*Variables).hasVariable[finalPosition] = 1;
+	}
+	if (canFindInitialPosition(*Variables) && (*Variables).hasVariable[initialPosition] == 0)
+	{
+		(*Variables).variableValue[5]=findingInitialPosition(*Variables);
+		(*Variables).hasVariable[initialPosition] = 1;
 	}
 }
