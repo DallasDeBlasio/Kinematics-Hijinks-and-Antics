@@ -149,7 +149,7 @@ double findingVelocity(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables
 	{
-		velocity = -141.141;
+		velocity = -1.0001;
 	}
 	return velocity;
 }
@@ -231,7 +231,7 @@ double findingInitialVelocity(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		initialVelocity = -141.141;
+		initialVelocity = -1.0001;
 	}
 	return initialVelocity;
 }
@@ -311,7 +311,7 @@ double findingAcceleration(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		initialVelocity = -141.141;
+		initialVelocity = -1.0001;
 	}
 	return initialVelocity;
 }
@@ -452,7 +452,7 @@ double findingTime(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		time = -141.141;
+		time = -1.0001;
 	}
 	return time;
 }
@@ -538,7 +538,7 @@ double findingFinalPosition(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		finalPosition = -141.141;
+		finalPosition = -1.0001;
 	}
 	return finalPosition;
 }
@@ -623,7 +623,7 @@ double findingInitialPosition(OneDVariables variables)
 	}
 	else//if cannot find velocity with provided variables, should not be reached
 	{
-		finalPosition = -141.141;
+		finalPosition = -1.0001;
 	}
 	return finalPosition;
 }
