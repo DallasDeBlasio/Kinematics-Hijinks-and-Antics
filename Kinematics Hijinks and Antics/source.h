@@ -28,6 +28,12 @@ typedef enum hasOrNo
 	doesHave,doesNotHave
 }hasOrNo;
 
+typedef enum canOrNo
+{
+	//has =0, doesNotHave =1
+	cannot, can
+}hasOrNo;
+
 int hasVariable(OneDVariables variables, int variableIndex);
 
 double findingVelocity(OneDVariables variables);

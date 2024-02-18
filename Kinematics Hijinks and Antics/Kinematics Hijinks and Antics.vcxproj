@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="functions.c" />
-    <ClCompile Include="kinematics.c" />
+    <ClCompile Include="1Dkinematics.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="user input.c" />
   </ItemGroup>
