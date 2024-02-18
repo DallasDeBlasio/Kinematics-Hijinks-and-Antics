@@ -6,7 +6,7 @@
 
 
 
-
+/*
 
 int hasVariable(OneDVariables variables, int variableIndex)
 {
@@ -146,3 +146,4 @@ double findingVelocity(OneDVariables variables)
 //	}
 //	return hasInitialPosition;
 //}
+*/

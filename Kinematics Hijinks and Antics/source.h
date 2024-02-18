@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
+
 
 
 //1D kinematics constant acceleration
@@ -31,3 +33,19 @@ typedef enum hasOrNo
 int hasVariable(OneDVariables variables, int variableIndex);
 
 double findingVelocity(OneDVariables variables);
+
+
+
+/**************************Functions for Menu*********************************/
+
+void MainMenu();
+
+
+/**************************Functions for user input*********************************/
+
+void fetchMeTheirSouls(OneDVariables* variables);
+void getVariableForStruct(int* variableIsHad, double* variableValue, char* field);
+void printStructInfo(OneDVariables variables);
+void clearScanf(void);
+void printSearchedNumber(OneDVariables variables, int index);
+int getBasicDesiredField1DKinematicsConstantAcceleration(void);
